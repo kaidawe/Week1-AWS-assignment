@@ -1,5 +1,10 @@
-const express = require("express");
-const app = express();
+const express = require('express')
+const app = express()
+
+app.get("/", (req, res) => {
+  console.log("GET /")
+  res.send("<h1>hello aws</h1>")
+})
 
 app.use(express.json())
 
