@@ -1,10 +1,7 @@
 const express = require('express')
 const app = express()
 
-app.get("/", (req, res) => {
-  console.log("GET /")
-  res.send("<h1>hello aws</h1>")
-})
+app.use(express.static("build"))
 
 app.use(express.json())
 
@@ -18,10 +15,12 @@ const pokemons = [
   }
 ]
 
+
 app.get("/api/pokemons", (req, res) => {
   console.log("GET /api/pokemons")
   res.send({pokemons: pokemons})
 });
+
 
 app.post("/api/pokemons", (req, res) => {
   const data = req.body
@@ -29,7 +28,14 @@ app.post("/api/pokemons", (req, res) => {
   data.id = pokemons.length+1
   pokemons.push(data)
   res.send(data)
-})
+});
+
+
+app.get('*', (req, res) => {
+    res.sendFile('build/index.html')
+});
 
 const port = process.env.PORT || 8080
 app.listen(port, () => console.log(`listening on port ${port}`))
+
+
