@@ -27,9 +27,18 @@ app.get("/api/pokemons", (req, res) => {
 app.post("/api/pokemons", (req, res) => {
   const data = req.body
   console.log("POST /api/pokemons", data)
-  data.id = pokemons.length+1
-  pokemons.push(data)
+
+  const newPokemon = new pokemons({
+    id: req.body.id,
+    name: req.body.name,
+    type: req.body.type,
+    level: req.body.level,
+    image: req.body.image
+  });
+
+  pokemons.push(newPokemon)
   res.send(data)
+
 });
 
 
