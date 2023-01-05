@@ -1,9 +1,11 @@
 const express = require('express')
 const app = express()
 
-app.use(express.static("build"))
+const path = require("path")
 
 app.use(express.json())
+
+app.use(express.static("build"))
 
 const pokemons = [
   {
@@ -32,7 +34,7 @@ app.post("/api/pokemons", (req, res) => {
 
 
 app.get('*', (req, res) => {
-    res.sendFile('build/index.html')
+    res.sendFile(path.join(__dirname, 'build/index.html'))
 });
 
 const port = process.env.PORT || 8080
