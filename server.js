@@ -29,11 +29,11 @@ app.post("/api/pokemons", (req, res) => {
   console.log("POST /api/pokemons", data)
 
   const newPokemon = new pokemons({
-    id: req.body.id,
-    name: req.body.name,
-    type: req.body.type,
-    level: req.body.level,
-    image: req.body.image
+    id: parseInt(data.id)+2,
+    name: data.name,
+    type: data.type,
+    level: data.level,
+    image: data.image
   });
 
   pokemons.push(newPokemon)
